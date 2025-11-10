@@ -1,14 +1,14 @@
 {
-  "students":[
+  "students": [
     {
-      "FullName":"Sanket",
-      "Email":"sanketkachhava@gmail.com",
-      "ContactNumber":"9146645911",
-      "Course":"MERN-Stack",
-      "BatchCode":"701",
-      "JoiningDate":"15-07-2025",
-      "Remarks":"want to build strong carreer in this field"
-      
+      "FullName": "raghu",
+      "Email": "raghuveershinde1249@gmail.com",
+      "ContactNumber": "09637140842",
+      "Course": "HTML",
+      "BatchCode": "40900",
+      "JoiningDate": "2025-10-27",
+      "Remarks": "my code",
+      "id": 2
     }
   ]
 }

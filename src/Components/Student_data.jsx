@@ -1,35 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Student_data = () => {
 
-  // 1 manage state
   const [data, setData] = useState([])
+  const navigate = useNavigate(); // ✅ for navigation
 
-  // 2 fetch data
+  // Fetch all students
   const FetchData = async () => {
-    const result = await axios.get('http://localhost:3000/students')
-    console.log(result.data)
-    setData(result.data)
+    try {
+      const result = await axios.get('http://localhost:3000/students')
+      setData(result.data)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    }
   }
 
-  // 3 useEffect
   useEffect(() => {
     FetchData()
   }, [])
 
-  // delete student
+  // Delete student
   const deleteStudent = async (id) => {
     try {
-      alert("Student deleted successfully " + id)
-      const result = data.filter((val) => val.id !== id)
-      setData(result)
-      await axios.delete(`http://localhost:3000/students/${id}`)
-      console.log("Successfully deleted student")
+      if (window.confirm('Are you sure you want to delete this student?')) {
+        await axios.delete(`http://localhost:3000/students/${id}`)
+        alert("Student deleted successfully!")
+        setData(data.filter((val) => val.id !== id))
+      }
     } catch (err) {
-      console.log("Failed to delete")
+      console.log("Failed to delete", err)
     }
+  }
+
+  // ✅ Navigate to Edit page with that student's ID
+  const editStudent = (id) => {
+    navigate(`/edit/${id}`)
   }
 
   return (
@@ -59,8 +66,8 @@ const Student_data = () => {
 
                 <tbody>
                   {
-                    data.map((val, index) => (
-                      <tr key={index}>
+                    data.map((val) => (
+                      <tr key={val.id}>
                         <td>{val.FullName}</td>
                         <td>{val.Email}</td>
                         <td>{val.ContactNumber}</td>
@@ -69,11 +76,21 @@ const Student_data = () => {
                         <td>{val.JoiningDate}</td>
                         <td>{val.Remarks}</td>
                         <td>
-                          <i className='fa fa-trash fw-bold text-danger me-3'
-                            onClick={() => { window.confirm('Are you sure?') ? deleteStudent(val.id) : null }}
-                            style={{ cursor: "pointer" }}>
-                          </i>
-                          <i className='fa fa-edit fw-bold text-success' style={{ cursor: "pointer" }}></i>
+                          {/* DELETE ICON */}
+                          <i
+                            className='fa-solid fa-trash text-danger me-3'
+                            onClick={() => deleteStudent(val.id)}
+                            style={{ cursor: "pointer" }}
+                            title="Delete Student"
+                          ></i>
+
+                          {/* EDIT ICON */}
+                          <i
+                            className='fa-solid fa-pen-to-square text-success'
+                            onClick={() => editStudent(val.id)} // ✅ navigate to edit page
+                            style={{ cursor: "pointer" }}
+                            title="Edit Student"
+                          ></i>
                         </td>
                       </tr>
                     ))

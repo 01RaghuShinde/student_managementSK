@@ -1,10 +1,11 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const Home = () => {
+const Edit = () => {
+  // Get student ID from URL
+  const { id } = useParams();
 
-  // 1 state defined
   const [data, setData] = useState({
     FullName: '',
     Email: '',
@@ -13,49 +14,41 @@ const Home = () => {
     BatchCode: '',
     JoiningDate: '',
     Remarks: ''
-  })
+  });
 
   const nav = useNavigate();
 
-  // 2 handle input
+  // Fetch student details by ID when page loads
+  useEffect(() => {
+    axios.get(`http://localhost:3000/students/${id}`)
+      .then((res) => setData(res.data))
+      .catch((err) => console.error("Failed to fetch student data", err));
+  }, [id]);
+
+  // Handle input
   const dataHandler = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value })
-  }
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
-  // 3 save form
-  const saveForm = async (e) => {
+  // Update form
+  const updateForm = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault()
-      
-      console.log(data)
-
-      await axios.post('http://localhost:3000/students', data)
-
-      setData({
-        FullName: '',
-        Email: '',
-        ContactNumber: '',
-        Course: '',
-        BatchCode: '',
-        JoiningDate: '',
-        Remarks: ''
-      })
-
-      // redirect to /student_data after successfully submitting form
-      nav('/student_data')
-
+      await axios.put(`http://localhost:3000/students/${id}`, data);
+      alert("✅ Student updated successfully!");
+      nav('/student_data'); // redirect back to student list
     } catch (err) {
-      alert("Error Occured",err)
-      console.log("Failed to register", err)
+      alert("❌ Failed to update student");
+      console.error("Update error:", err);
     }
-  }
+  };
 
   return (
     <>
       <div className="container-fluid shadow-lg fw-bold p-5">
-        <h3 className="text-center mb-3 text-primary">Student Registration 📝</h3>
+        <h3 className="text-center mb-3 text-primary">Edit Student 📝</h3>
 
-        <form onSubmit={(e)=>saveForm(e)}>
+        <form onSubmit={updateForm}>
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="FullName" className="form-label">Full Name</label>
@@ -163,11 +156,11 @@ const Home = () => {
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-primary w-100">Register</button>
+          <button type="submit" className="btn btn-success w-100">Update</button>
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Edit;
