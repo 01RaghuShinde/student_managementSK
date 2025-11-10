@@ -66,15 +66,15 @@ const Student_data = () => {
 
                 <tbody>
                   {
-                    data.map((val) => (
-                      <tr key={val.id}>
-                        <td>{val.FullName}</td>
-                        <td>{val.Email}</td>
-                        <td>{val.ContactNumber}</td>
-                        <td>{val.Course}</td>
-                        <td>{val.BatchCode}</td>
-                        <td>{val.JoiningDate}</td>
-                        <td>{val.Remarks}</td>
+                    data.map((val, index) => (
+                      <tr key={index}>
+                        <td>{val.fullName}</td>
+                        <td>{val.email}</td>
+                        <td>{val.contactNumber}</td>
+                        <td>{val.course}</td>
+                        <td>{val.batchCode}</td>
+                        <td>{val.joiningDate}</td>
+                        <td>{val.remarks}</td>
                         <td>
                           {/* DELETE ICON */}
                           <i

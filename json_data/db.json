@@ -1,14 +1,34 @@
 {
   "students": [
     {
-      "FullName": "raghu",
-      "Email": "raghuveershinde1249@gmail.com",
-      "ContactNumber": "09637140842",
-      "Course": "HTML",
-      "BatchCode": "40900",
-      "JoiningDate": "2025-10-27",
-      "Remarks": "my code",
+      "id": 1,
+      "fullName": "Sanket",
+      "email": "sanketkachhava@gmail.com",
+      "contactNumber": "9146645911",
+      "course": "MERN-Stack",
+      "batchCode": "701",
+      "joiningDate": "15-07-2025",
+      "remarks": "want to build strong career in this field"
+    },
+    {
+      "fullName": "sanket kachhava",
+      "email": "sanketkachhava@gmail.com",
+      "contactNumber": "09146645911",
+      "course": "CSS",
+      "batchCode": "201",
+      "joiningDate": "0225-02-01",
+      "remarks": "kjg",
       "id": 2
+    },
+    {
+      "fullName": "kalpesh chaudhari",
+      "email": "kalpesh@gmail.com",
+      "contactNumber": "09146645911",
+      "course": "React",
+      "batchCode": "701",
+      "joiningDate": "2025-06-12",
+      "remarks": "react",
+      "id": 3
     }
   ]
 }
