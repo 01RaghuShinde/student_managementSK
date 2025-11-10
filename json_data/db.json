@@ -1,0 +1,14 @@
+{
+  "students":[
+    {
+      "FullName":"Sanket",
+      "Email":"sanketkachhava@gmail.com",
+      "ContactNumber":"9146645911",
+      "Course":"MERN-Stack",
+      "BatchCode":"701",
+      "JoiningDate":"15-07-2025",
+      "Remarks":"want to build strong carreer in this field"
+      
+    }
+  ]
+}
