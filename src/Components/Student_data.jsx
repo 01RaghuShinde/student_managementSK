@@ -61,13 +61,13 @@ const Student_data = () => {
                   {
                     data.map((val, index) => (
                       <tr key={index}>
-                        <td>{val.FullName}</td>
-                        <td>{val.Email}</td>
-                        <td>{val.ContactNumber}</td>
-                        <td>{val.Course}</td>
-                        <td>{val.BatchCode}</td>
-                        <td>{val.JoiningDate}</td>
-                        <td>{val.Remarks}</td>
+                        <td>{val.fullName}</td>
+                        <td>{val.email}</td>
+                        <td>{val.contactNumber}</td>
+                        <td>{val.course}</td>
+                        <td>{val.batchCode}</td>
+                        <td>{val.joiningDate}</td>
+                        <td>{val.remarks}</td>
                         <td>
                           <i className='fa fa-trash fw-bold text-danger me-3'
                             onClick={() => { window.confirm('Are you sure?') ? deleteStudent(val.id) : null }}
